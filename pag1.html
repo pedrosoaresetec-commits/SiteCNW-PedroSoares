@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro Soares — Aluno de T.I. | ETEC MCM</title>
+<meta name="description" content="Portfólio de Pedro Soares, aluno de Técnico em Informática na ETEC Maria Cristina Medeiros. Turma 2ºC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanline-overlay" aria-hidden="true"></div>
+
+<header class="site-header" id="topo">
+  <div class="header-inner">
+    <a href="#topo" class="logo">
+      <span class="logo-bracket">&lt;</span>PS<span class="logo-bracket">/&gt;</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#sobre">Sobre</a>
+      <a href="#universo">Meu Universo</a>
+      <a href="#dan-the-man">Dan the Man</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mono">ETEC MARIA CRISTINA MEDEIROS — 2ºC · T.I.</p>
+        <h1 class="hero-title">PEDRO<br>SOARES</h1>
+        <p class="hero-subtitle">Aluno de Técnico em Informática, apaixonado por tecnologia, programação e <span class="hl">jogos mobile</span>.</p>
+
+        <div class="terminal" role="img" aria-label="Terminal simulando o comando whoami com os dados de Pedro Soares">
+          <div class="terminal-bar">
+            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+            <span class="terminal-title mono">pedro@etec-mcm:~</span>
+          </div>
+          <div class="terminal-body mono" id="terminalBody"></div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#sobre" class="btn btn-ghost pixel-corners">Sobre mim</a>
+          <a href="dan-the-man/index.html" class="btn btn-primary pixel-corners">Conheça o Dan the Man</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="sprite-frame pixel-corners">
+          <div class="sprite" id="sprite">
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+            <div class="sprite-row"></div>
+          </div>
+          <p class="sprite-caption mono">player_01.spr</p>
+        </div>
+        <div class="floating-tag mono tag-1">console.log("game on")</div>
+        <div class="floating-tag mono tag-2">while(true) { play(); }</div>
+      </div>
+    </div>
+    <div class="scroll-hint mono" aria-hidden="true">role para baixo ↓</div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="section" id="sobre">
+    <div class="section-inner">
+      <p class="eyebrow mono">// sobre-pedro.json</p>
+      <h2 class="section-title">Quem é o aluno por trás do código</h2>
+
+      <div class="about-grid">
+        <div class="info-card reveal">
+          <span class="info-icon" aria-hidden="true">👤</span>
+          <span class="info-label mono">nome</span>
+          <span class="info-value">Pedro Soares</span>
+        </div>
+        <div class="info-card reveal">
+          <span class="info-icon" aria-hidden="true">🏫</span>
+          <span class="info-label mono">escola</span>
+          <span class="info-value">ETEC Maria Cristina Medeiros</span>
+        </div>
+        <div class="info-card reveal">
+          <span class="info-icon" aria-hidden="true">🎓</span>
+          <span class="info-label mono">turma</span>
+          <span class="info-value">2º C</span>
+        </div>
+        <div class="info-card reveal">
+          <span class="info-icon" aria-hidden="true">💻</span>
+          <span class="info-label mono">curso</span>
+          <span class="info-value">Técnico em Informática</span>
+        </div>
+        <div class="info-card info-card-wide reveal">
+          <span class="info-icon" aria-hidden="true">🚀</span>
+          <span class="info-label mono">interesses</span>
+          <span class="info-value">Tecnologia, programação e jogos mobile</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEU UNIVERSO -->
+  <section class="section section-alt" id="universo">
+    <div class="section-inner">
+      <p class="eyebrow mono">// meu-universo</p>
+      <h2 class="section-title">O que me move</h2>
+
+      <div class="universe-grid">
+        <div class="universe-card reveal">
+          <span class="universe-emoji" aria-hidden="true">💻</span>
+          <h3>Tecnologia</h3>
+          <p>Curioso por entender como sistemas e redes funcionam por trás das telas.</p>
+        </div>
+        <div class="universe-card reveal">
+          <span class="universe-emoji" aria-hidden="true">🎮</span>
+          <h3>Games</h3>
+          <p>De clássicos de plataforma a lançamentos indie, jogar é onde eu recarrego a criatividade.</p>
+        </div>
+        <div class="universe-card reveal">
+          <span class="universe-emoji" aria-hidden="true">📱</span>
+          <h3>Jogos Mobile</h3>
+          <p>Acompanho de perto o universo mobile — design, controles touch e jogabilidade rápida.</p>
+        </div>
+        <div class="universe-card reveal">
+          <span class="universe-emoji" aria-hidden="true">👨‍💻</span>
+          <h3>Programação</h3>
+          <p>Aprendendo lógica, front-end e boas práticas dentro do curso de T.I.</p>
+        </div>
+        <div class="universe-card universe-card-game reveal">
+          <span class="game-badge mono">FAVORITO</span>
+          <span class="universe-emoji" aria-hidden="true">⚔️</span>
+          <h3>Dan the Man</h3>
+          <p>Esse jogo de plataforma e ação faz parte da minha lista de favoritos — e tem site próprio aqui no projeto.</p>
+          <a href="dan-the-man/index.html" class="btn btn-small btn-primary pixel-corners">Jogar / Ver site →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTAQUE DAN THE MAN -->
+  <section class="section" id="dan-the-man">
+    <div class="section-inner">
+      <p class="eyebrow mono">// destaque</p>
+      <h2 class="section-title">Um dos meus jogos favoritos</h2>
+
+      <div class="game-feature reveal">
+        <div class="game-feature-visual pixel-corners" aria-hidden="true">
+          <div class="cartridge">
+            <div class="cartridge-label mono">DAN<br>THE MAN</div>
+            <div class="cartridge-stripe"></div>
+          </div>
+        </div>
+        <div class="game-feature-copy">
+          <h3>Dan the Man</h3>
+          <p>Dan the Man é um dos jogos que mais representa meu interesse por jogos mobile e pelo estilo clássico de plataforma e ação. Fases rápidas, combate direto e visual em pixel art — tudo que eu gosto em um game.</p>
+          <a href="dan-the-man/index.html" class="btn btn-primary pixel-corners">Entrar no site do Dan the Man →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="mono">Pedro Soares — 2º C | T.I. | ETEC MCM</p>
+    <a href="dan-the-man/index.html" class="footer-link">Site do Dan the Man →</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
