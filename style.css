@@ -1,0 +1,573 @@
+/* ============================================
+   PEDRO SOARES — HOME / PORTFÓLIO
+   Tokens, reset e estilos gerais
+   ============================================ */
+
+:root {
+  /* Cores — inspiradas em tecnologia + identidade ETEC (azul institucional) + games */
+  --bg-base: #12142B;
+  --bg-panel: #1B1E3D;
+  --bg-panel-alt: #20244D;
+  --border: #2E3163;
+  --border-soft: #262A54;
+
+  --accent-cyan: #4CF3FF;    /* tecnologia / T.I. */
+  --accent-magenta: #FF4FA3; /* games / Dan the Man */
+  --accent-yellow: #FFD966;  /* destaques pontuais */
+
+  --text-primary: #F2F4FF;
+  --text-muted: #9AA0C7;
+  --text-faint: #6C72A0;
+
+  --font-display: 'Press Start 2P', cursive;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --radius-soft: 10px;
+  --shadow-glow-cyan: 0 0 24px rgba(76, 243, 255, 0.25);
+  --shadow-glow-magenta: 0 0 24px rgba(255, 79, 163, 0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-base);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+  background-size: 22px 22px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.mono { font-family: var(--font-mono); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
+/* Efeito de scanline sutil, reforça a estética retro/pixel sem exagerar */
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.015) 0px,
+    rgba(255,255,255,0.015) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Bordas em "degrau" — recorta os cantos em pixels para o toque 8-bit */
+.pixel-corners {
+  clip-path: polygon(
+    0px 8px, 8px 8px, 8px 0px,
+    calc(100% - 8px) 0px, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0px calc(100% - 8px)
+  );
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(18, 20, 43, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.header-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+.logo-bracket { color: var(--accent-cyan); }
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.main-nav a {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+.main-nav a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent-cyan);
+  transition: width 0.25s ease;
+}
+.main-nav a:not(.nav-cta):hover { color: var(--text-primary); }
+.main-nav a:not(.nav-cta):hover::after { width: 100%; }
+
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--bg-base);
+  background: var(--accent-cyan);
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 72px 28px 40px;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--accent-cyan);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  margin-bottom: 22px;
+  text-shadow: 3px 3px 0 rgba(255, 79, 163, 0.35);
+}
+
+.hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1.08rem;
+  max-width: 46ch;
+  margin-bottom: 32px;
+}
+.hl { color: var(--accent-magenta); font-weight: 600; }
+
+/* Terminal */
+.terminal {
+  background: #0D0F24;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #161933;
+  border-bottom: 1px solid var(--border);
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #FF5F56; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #27C93F; }
+.terminal-title {
+  margin-left: 8px;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+}
+.terminal-body {
+  padding: 18px 20px;
+  min-height: 118px;
+  font-size: 0.88rem;
+  color: var(--accent-cyan);
+  white-space: pre-wrap;
+}
+.terminal-body .caret {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--accent-cyan);
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 14px 26px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+.btn-small { padding: 10px 18px; font-size: 0.8rem; }
+
+.btn-primary {
+  background: var(--accent-magenta);
+  color: #1A0A15;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-magenta);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+}
+.btn-ghost:hover {
+  background: rgba(76, 243, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+/* Hero visual — sprite pixelado construído em CSS */
+.hero-visual { position: relative; display: flex; flex-direction: column; align-items: center; }
+
+.sprite-frame {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  padding: 28px;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.sprite {
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  gap: 3px;
+  width: 160px;
+  aspect-ratio: 1;
+  margin: 0 auto 16px;
+}
+.sprite-row {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 3px;
+}
+.sprite-row::before,
+.sprite-row::after { content: ''; }
+
+/* Pixels definidos via box-shadow para montar um "personagem" simples em pixel art */
+.sprite-row:nth-child(1) { background: transparent; }
+.sprite { position: relative; }
+.sprite::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--bg-panel-alt) 20px, transparent 0);
+}
+
+.sprite-row { background: transparent; }
+.sprite-row:nth-child(1) { box-shadow: none; }
+
+/* Grade de pixels desenhada com gradientes repetidos para simular um sprite 8-bit */
+.sprite {
+  background-image:
+    linear-gradient(90deg, transparent 0 12.5%, var(--accent-cyan) 12.5% 25%, transparent 25% 37.5%, var(--accent-cyan) 37.5% 62.5%, transparent 62.5% 75%, var(--accent-cyan) 75% 87.5%, transparent 87.5% 100%),
+    linear-gradient(90deg, var(--accent-magenta) 0 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 12.5%, 100% 12.5%;
+  background-position: 0 0, 0 25%;
+  border: 2px dashed var(--border-soft);
+}
+
+.sprite-caption { color: var(--text-faint); font-size: 0.7rem; }
+
+.floating-tag {
+  position: absolute;
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  background: rgba(27, 30, 61, 0.9);
+  border: 1px solid var(--border-soft);
+  padding: 6px 10px;
+  border-radius: 4px;
+  animation: float 5s ease-in-out infinite;
+}
+.tag-1 { top: -10px; right: 10px; animation-delay: 0s; }
+.tag-2 { bottom: 20px; left: -20px; animation-delay: 1.2s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.scroll-hint {
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  margin-top: 48px;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ============================================
+   SEÇÕES GERAIS
+   ============================================ */
+
+.section { padding: 90px 28px; }
+.section-alt { background: var(--bg-panel); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+.section-inner { max-width: 1180px; margin: 0 auto; }
+
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  margin-bottom: 48px;
+  max-width: 22ch;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* Sobre — cards */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.info-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-soft);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.info-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-cyan);
+}
+.info-card-wide { grid-column: span 4; flex-direction: row; align-items: center; gap: 18px; }
+.info-icon { font-size: 1.6rem; }
+.info-label { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.info-value { font-size: 1.05rem; font-weight: 600; }
+
+/* Meu Universo — cards */
+.universe-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.universe-card {
+  background: var(--bg-base);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-soft);
+  padding: 28px 22px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.universe-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-glow-cyan);
+}
+.universe-emoji { font-size: 1.8rem; display: block; margin-bottom: 14px; }
+.universe-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.universe-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+.universe-card-game {
+  grid-column: span 2;
+  background: linear-gradient(145deg, var(--bg-panel-alt), var(--bg-panel));
+  border-color: var(--accent-magenta);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.universe-card-game:hover {
+  box-shadow: var(--shadow-glow-magenta);
+  border-color: var(--accent-magenta);
+}
+.game-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 0.65rem;
+  background: var(--accent-magenta);
+  color: #1A0A15;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+.universe-card-game .btn { margin-top: 14px; align-self: flex-start; }
+
+/* Destaque Dan the Man */
+.game-feature {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: 48px;
+  align-items: center;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-soft);
+  padding: 44px;
+}
+
+.game-feature-visual { display: flex; justify-content: center; }
+.cartridge {
+  width: 210px;
+  height: 260px;
+  background: linear-gradient(160deg, var(--accent-magenta), #8A1F5E);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 25px 50px -20px rgba(255, 79, 163, 0.5);
+}
+.cartridge-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: #FFF;
+  text-align: center;
+  line-height: 1.8;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+}
+.cartridge-stripe {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30px;
+  background: var(--accent-yellow);
+}
+
+.game-feature-copy h3 { font-size: 1.6rem; margin-bottom: 14px; }
+.game-feature-copy p { color: var(--text-muted); margin-bottom: 24px; max-width: 55ch; }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.site-footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 32px 28px;
+}
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--text-faint);
+  font-size: 0.85rem;
+}
+.footer-link {
+  color: var(--accent-cyan);
+  transition: color 0.2s ease;
+}
+.footer-link:hover { color: var(--accent-magenta); }
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { order: -1; max-width: 280px; margin: 0 auto 24px; }
+  .about-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-card-wide { grid-column: span 2; }
+  .universe-grid { grid-template-columns: repeat(2, 1fr); }
+  .universe-card-game { grid-column: span 2; }
+  .game-feature { grid-template-columns: 1fr; text-align: center; padding: 32px; }
+  .game-feature-copy p { margin-left: auto; margin-right: auto; }
+}
+
+@media (max-width: 640px) {
+  .main-nav {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-soft);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 28px;
+    gap: 16px;
+    display: none;
+  }
+  .main-nav.open { display: flex; }
+  .nav-toggle { display: flex; }
+  .about-grid, .universe-grid { grid-template-columns: 1fr; }
+  .info-card-wide, .universe-card-game { grid-column: span 1; }
+  .hero { padding-top: 40px; }
+  .section { padding: 64px 22px; }
+}
